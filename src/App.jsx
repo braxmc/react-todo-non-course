@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import TodoInput from './components/TodoInput.jsx';
+import TodoList from './components/TodoList.jsx';
 
 export default function App() {
   // Setting todo list state. 
@@ -50,21 +52,8 @@ export default function App() {
       <header>
         <h1>Todo List Application</h1>
       </header>
-      <div className='todo-input'>
-        <input onChange={handleTodoUpdate} onKeyDown={handleKeyDown} value={newTodo} type="text" />
-        <button onClick={handleAddTodo}>Add Task</button>
-      </div>
-      <div className='todo-list'>
-        <h3>List of Todo's</h3>
-        <ol>
-          {todo.map((todo) => {
-            return <li key={todo.id}>
-              <span class="todo-txt">{todo.task}</span>
-              <button className='delete' onClick={() => handleTodoDelete(todo.id)}>Completed</button>
-            </li>
-          })}
-        </ol>
-      </div>
+      <TodoInput handleUpdate={handleTodoUpdate} handleKey={handleKeyDown} value={newTodo} handleAdd={handleAddTodo} />
+      <TodoList todo={todo} handleDelete={handleTodoDelete} />
     </>
   )
 }
